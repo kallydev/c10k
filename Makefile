@@ -5,6 +5,13 @@ install_go:
 	apt install -y build-essential
 	snap install go --classic
 
+install_wrk:
+	apt install -y build-essential libssl-dev git unzip
+	git submodule init
+	git submodule update
+	cd ./tool/wrk && make
+	cp ./tool/wrk/wrk /usr/local/bin
+
 enable_bbr:
 	echo net.core.default_qdisc=fq >> /etc/sysctl.conf
 	echo net.ipv4.tcp_congestion_control=bbr >> /etc/sysctl.conf
