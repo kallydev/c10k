@@ -3,8 +3,11 @@ build:
 	go build -ldflags '-w -s' -gcflags=-l=4 -o ./build/main main.go
 	upx -9 ./build/main
 
-test_concurrency:
-	wrk -t12 -c2000 -d15s "http://localhost/"
+benchmark_wrk:
+	wrk -t12 -c200 -d30s "http://localhost/"
+
+benchmark_ab:
+	ab -n 20000 -c 200 "http://localhost/"
 
 install_go:
 	apt install -y build-essential
@@ -12,7 +15,6 @@ install_go:
 
 install_nginx:
 	apt install -y nginx
-
 
 install_wrk:
 	apt install -y build-essential libssl-dev git unzip
