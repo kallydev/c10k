@@ -1,3 +1,8 @@
+build:
+	apt install -y upx
+	go build -ldflags '-w -s' -gcflags=-l=4 main.go
+	upx -9 main
+
 test_concurrency:
 	wrk -t12 -c2000 -d15s "http://localhost/"
 
