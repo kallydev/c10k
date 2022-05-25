@@ -1,9 +1,12 @@
-module c10k
+module github.com/kallydev/c10k
 
 go 1.18
 
 require (
 	github.com/fasthttp/router v1.4.9
+	github.com/google/uuid v1.3.0
+	github.com/jmoiron/sqlx v1.3.5
+	github.com/lib/pq v1.10.6
 	github.com/valyala/fasthttp v1.37.0
 )
 

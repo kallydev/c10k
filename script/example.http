@@ -1,0 +1,9 @@
+GET http://localhost/
+Accept: application/json
+
+###
+
+GET http://localhost/posts
+Accept: application/json
+
+###
