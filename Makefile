@@ -21,6 +21,9 @@ install_wrk:
 	cd ./tool/wrk && make
 	cp ./tool/wrk/wrk /usr/local/bin
 
+install_ab:
+	apt install -y apache2-utils
+
 enable_bbr:
 	echo net.core.default_qdisc=fq >> /etc/sysctl.conf
 	echo net.ipv4.tcp_congestion_control=bbr >> /etc/sysctl.conf
