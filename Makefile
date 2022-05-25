@@ -10,6 +10,10 @@ install_go:
 	apt install -y build-essential
 	snap install go --classic
 
+install_nginx:
+	apt install -y nginx
+
+
 install_wrk:
 	apt install -y build-essential libssl-dev git unzip
 	git submodule init
