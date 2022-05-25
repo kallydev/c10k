@@ -1,7 +1,12 @@
 package handler
 
-import "github.com/jmoiron/sqlx"
+import (
+	"html/template"
+
+	"github.com/jmoiron/sqlx"
+)
 
 type Handler struct {
-	DB *sqlx.DB
+	DB           *sqlx.DB
+	HtmlTemplate *template.Template
 }

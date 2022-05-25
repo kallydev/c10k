@@ -13,11 +13,13 @@ type GetPostListErrorResponse struct {
 }
 
 func (h *Handler) GetPostList(ctx *fasthttp.RequestCtx) {
+	ctx.SetContentType("application/json")
+
 	rows, err := h.DB.Queryx("SELECT * FROM posts;")
 	if err != nil {
 		ctx.SetStatusCode(http.StatusInternalServerError)
 
-		_ = json.NewEncoder(ctx.Response.BodyWriter()).Encode(&GetPostListErrorResponse{
+		_ = json.NewEncoder(ctx).Encode(&GetPostListErrorResponse{
 			Error: err.Error(),
 		})
 
@@ -32,7 +34,7 @@ func (h *Handler) GetPostList(ctx *fasthttp.RequestCtx) {
 		if err := rows.StructScan(&post); err != nil {
 			ctx.SetStatusCode(http.StatusInternalServerError)
 
-			_ = json.NewEncoder(ctx.Response.BodyWriter()).Encode(&GetPostListErrorResponse{
+			_ = json.NewEncoder(ctx).Encode(&GetPostListErrorResponse{
 				Error: err.Error(),
 			})
 
@@ -42,5 +44,5 @@ func (h *Handler) GetPostList(ctx *fasthttp.RequestCtx) {
 		posts = append(posts, post)
 	}
 
-	_ = json.NewEncoder(ctx.Response.BodyWriter()).Encode(posts)
+	_ = json.NewEncoder(ctx).Encode(posts)
 }

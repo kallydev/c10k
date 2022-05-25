@@ -8,10 +8,13 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/kallydev/c10k/internal/database"
 	"github.com/kallydev/c10k/internal/handler"
+	"github.com/kallydev/c10k/internal/template"
 	"github.com/valyala/fasthttp"
 )
 
-var db *sqlx.DB
+var (
+	db *sqlx.DB
+)
 
 func init() {
 	var err error
@@ -24,8 +27,14 @@ func init() {
 func main() {
 	httpRouter := router.New()
 
+	htmlTemplate, err := template.Parse()
+	if err != nil {
+		log.Fatalln(err)
+	}
+
 	httpHandler := handler.Handler{
-		DB: db,
+		DB:           db,
+		HtmlTemplate: htmlTemplate,
 	}
 
 	httpRouter.GET("/", httpHandler.GetIndex)

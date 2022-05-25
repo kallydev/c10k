@@ -1,0 +1,20 @@
+{{ define "index" }}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Title</title>
+    </head>
+    <body>
+    <ul>
+        {{ range .Posts }}
+            <li>
+                <p>{{ .Title }}</p>
+                <p>{{ .Content }}</p>
+            </li>
+        {{ end }}
+    </ul>
+    </body>
+    </html>
+{{ end }}
