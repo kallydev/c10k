@@ -16,3 +16,11 @@ enable_bbr:
 	echo net.core.default_qdisc=fq >> /etc/sysctl.conf
 	echo net.ipv4.tcp_congestion_control=bbr >> /etc/sysctl.conf
 	sysctl -p
+
+enable_swap:
+	fallocate -l 2G /swap
+	chmod 600 /swap
+	mkswap /swap
+	swapon /swap
+	cp /etc/fstab /etc/fstab.backup
+	echo '/swap none swap sw 0 0' | tee -a /etc/fstab
